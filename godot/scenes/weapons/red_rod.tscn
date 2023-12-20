@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://pk4mf60y0hnc"]
+
+[ext_resource type="Texture2D" uid="uid://b5x8qy1qsig3o" path="res://assets/items/weapons/weapon_red_magic_staff.png" id="1_54ek1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2m2js"]
+size = Vector2(4, 4)
+
+[node name="RedRod" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -14)
+texture = ExtResource("1_54ek1")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_2m2js")
+debug_color = Color(0.92549, 0.25098, 0.298039, 0.419608)

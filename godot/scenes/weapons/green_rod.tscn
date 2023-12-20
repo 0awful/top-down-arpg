@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2gse8riaiqt6"]
+
+[ext_resource type="Texture2D" uid="uid://btgaw3iqsw1ho" path="res://assets/items/weapons/weapon_green_magic_staff.png" id="1_nxf1b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2m2js"]
+size = Vector2(4, 6)
+
+[node name="GreenRod" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -14)
+texture = ExtResource("1_nxf1b")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -26)
+shape = SubResource("RectangleShape2D_2m2js")
+debug_color = Color(0.92549, 0.25098, 0.298039, 0.419608)

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2divvgm45k8q"]
+
+[ext_resource type="Texture2D" uid="uid://b6v5fwvumlr5y" path="res://assets/items/weapons/weapon_throwing_axe.png" id="1_q451p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2m2js"]
+size = Vector2(10, 9)
+
+[node name="ThrowingAxe" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -6)
+texture = ExtResource("1_q451p")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(1, -8.5)
+shape = SubResource("RectangleShape2D_2m2js")
+debug_color = Color(0.92549, 0.25098, 0.298039, 0.419608)

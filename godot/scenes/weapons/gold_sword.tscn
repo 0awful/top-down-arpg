@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://0s4cqlnmfawo"]
+
+[ext_resource type="Texture2D" uid="uid://bqvopcfjloq7l" path="res://assets/items/weapons/weapon_golden_sword.png" id="1_t52nx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2m2js"]
+size = Vector2(4, 16)
+
+[node name="GoldSword" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -10)
+texture = ExtResource("1_t52nx")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -13)
+shape = SubResource("RectangleShape2D_2m2js")
+debug_color = Color(0.92549, 0.25098, 0.298039, 0.419608)

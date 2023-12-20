@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://vx0ley3x1hs4"]
+
+[ext_resource type="Texture2D" uid="uid://b1th0nxa5eymi" path="res://assets/items/weapons/weapon_cleaver.png" id="1_d4g14"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2m2js"]
+size = Vector2(7, 13)
+
+[node name="Cleaver" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, -9)
+texture = ExtResource("1_d4g14")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, -11.5)
+shape = SubResource("RectangleShape2D_2m2js")
+debug_color = Color(0.92549, 0.25098, 0.298039, 0.419608)

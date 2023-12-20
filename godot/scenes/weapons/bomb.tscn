@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5v5fb4qwl2vl"]
+
+[ext_resource type="Texture2D" uid="uid://2b0bcfisuh1g" path="res://assets/items/bomb/bomb_f1.png" id="1_0hbum"]
+[ext_resource type="Texture2D" uid="uid://4i72md5oi216" path="res://assets/items/bomb/bomb_f2.png" id="2_0to60"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_uc5gp"]
+frames = 2
+frame_0/texture = ExtResource("1_0hbum")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("2_0to60")
+frame_1/duration = 0.1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oa1eb"]
+radius = 75.0067
+
+[node name="Bomb" type="Bomb"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AnimatedTexture_uc5gp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_oa1eb")

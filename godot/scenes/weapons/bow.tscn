@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjckmxptii4ur"]
+
+[ext_resource type="Texture2D" uid="uid://ciyiw5hb4g4il" path="res://assets/items/weapons/weapon_bow.png" id="1_sw07q"]
+[ext_resource type="Texture2D" uid="uid://ccx1wwafihfdr" path="res://assets/items/weapons/weapon_bow_2.png" id="2_0aq5o"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_rk4xs"]
+frames = 2
+frame_0/texture = ExtResource("1_sw07q")
+frame_1/texture = ExtResource("2_0aq5o")
+frame_1/duration = 1.0
+
+[node name="Bow" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-5, 0)
+texture = SubResource("AnimatedTexture_rk4xs")

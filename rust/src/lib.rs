@@ -1,5 +1,9 @@
 use godot::prelude::*;
 
+pub mod camera;
+pub mod world;
+pub mod zone;
+
 pub mod resources;
 pub use resources::*;
 
