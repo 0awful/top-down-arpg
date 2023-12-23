@@ -1,5 +1,5 @@
 pub mod player;
-pub mod weapon;
+pub mod weapon_handle;
 
 pub use player::Player;
-pub use weapon::Weapon;
+pub use weapon_handle::WeaponHandle;

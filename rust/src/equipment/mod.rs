@@ -1,9 +1,5 @@
-pub mod bomb;
-pub mod bow;
-pub mod potion;
-pub mod sword;
+pub mod projectile_weapon;
+pub mod swingable_weapon;
 
-pub use bomb::Bomb;
-pub use bow::Bow;
-pub use potion::Potion;
-pub use sword::Sword;
+pub use projectile_weapon::ProjectileWeapon;
+pub use swingable_weapon::SwingableWeapon;
