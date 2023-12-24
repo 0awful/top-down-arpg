@@ -15,3 +15,16 @@ pub fn update_facing(movement_vec: Vector2) -> Option<FacingDirection> {
     }
     return None;
 }
+
+// Returns the groups of self or nearest parent with groups.
+// If there is no parent with groups returns an empty array.
+pub fn get_nearest_groups(node: Gd<Node>) -> Array<StringName> {
+    if node.get_groups().len() > 0 {
+        return node.get_groups();
+    }
+    if let Some(parent) = node.get_parent() {
+        return get_nearest_groups(parent);
+    } else {
+        return Array::new();
+    }
+}
