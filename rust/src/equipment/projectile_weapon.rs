@@ -9,7 +9,13 @@ pub struct ProjectileWeapon {
 }
 
 #[godot_api]
-impl ProjectileWeapon {}
+impl ProjectileWeapon {
+    #[func]
+    pub fn attack(&mut self) {
+        // There's an animation that plays on the weapon and then a projectile spawns
+        // Thrown are different with a looping animation until impact
+    }
+}
 
 #[godot_api]
 impl IArea2D for ProjectileWeapon {

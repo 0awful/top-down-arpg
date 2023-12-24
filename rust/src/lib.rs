@@ -6,6 +6,9 @@ pub mod utils;
 pub mod world;
 pub mod zone;
 
+pub mod entities;
+pub use entities::*;
+
 pub mod resources;
 pub use resources::*;
 

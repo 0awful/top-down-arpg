@@ -35,12 +35,16 @@ impl SwingableWeapon {
 
     #[func]
     pub fn show(&mut self) {
-        self.base.get_node_as::<CollisionShape2D>("Hitbox").show();
+        self.base
+            .get_node_as::<CollisionShape2D>("Hitbox")
+            .set_disabled(false);
         self.base.get_node_as::<Sprite2D>("Sprite2D").show();
     }
     #[func]
     pub fn hide(&mut self) {
-        self.base.get_node_as::<CollisionShape2D>("Hitbox").hide();
+        self.base
+            .get_node_as::<CollisionShape2D>("Hitbox")
+            .set_disabled(true);
         self.base.get_node_as::<Sprite2D>("Sprite2D").hide();
     }
 }
