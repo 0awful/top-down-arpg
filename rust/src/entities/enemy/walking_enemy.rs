@@ -1,8 +1,9 @@
 use godot::engine::{Area2D, CharacterBody2D};
 use godot::prelude::*;
 
-use crate::consts::{KNOCKBACK_POWER, MOB_SPEED};
-use crate::utils::get_nearest_groups;
+use crate::consts::MOB_SPEED;
+use crate::entities::Knockback;
+use crate::utils::{check_overlap, damage_handler, get_nearest, get_nearest_groups};
 
 #[derive(GodotClass)]
 #[class(init, base = CharacterBody2D)]
@@ -12,27 +13,32 @@ pub struct WalkingEnemy {
 
     #[init(default = MOB_SPEED)]
     pub speed: real,
-    #[init(default = KNOCKBACK_POWER)]
-    pub knockback: real,
     pub target: Option<Vector2>,
 }
 #[godot_api]
 impl WalkingEnemy {
     #[func]
-    pub fn hit_by_weapon(&mut self, area: Gd<Area2D>) {
+    pub fn hurtbox_entered(&mut self, area: Gd<Area2D>) {
+        // this could be pulled into a function. Potientially it would be able to put it on a hurtbox node.
         let area_groups = get_nearest_groups(area.clone().upcast());
         let self_groups = get_nearest_groups(self.base.clone().upcast());
-        for item in area_groups.iter_shared() {
-            if self_groups.contains(&item) {
-                return;
-            }
-        }
-        godot_print!("hit by {:?} not in its group", area)
-    }
 
-    #[func]
-    pub fn hit_by_player(&mut self, area: Gd<Area2D>) {
-        godot_print!("hit by {:?}", area)
+        if check_overlap(area_groups, self_groups) {
+            return;
+        }
+
+        godot_print!("Hurtbox entered");
+        damage_handler(self.base.clone().upcast(), area.clone().upcast());
+        // knockback is a vector. This won't work. Gotta change the API a little eventually.
+        if let Some(knockback) = get_nearest::<Knockback>(area.clone().upcast(), "Knockback".into())
+        {
+            self.knockback(knockback.bind().value);
+        } else {
+            godot_error!(
+                "attacking item initialized without knockback resource, {:?}",
+                area
+            )
+        }
     }
 
     #[func]
@@ -42,8 +48,13 @@ impl WalkingEnemy {
     pub fn assign_target(&mut self, position: Vector2) {}
 
     #[func]
-    pub fn knockback(&mut self) {}
+    pub fn knockback(&mut self, amount: real) {
+        godot_print!("received knockback {}", amount)
+    }
 
     #[func]
-    pub fn death(&mut self) {}
+    pub fn death(&mut self) {
+        godot_print!("Enemy died");
+        self.base.queue_free();
+    }
 }

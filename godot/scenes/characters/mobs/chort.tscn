@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://4k3misytlsdh"]
+
+[ext_resource type="PackedScene" uid="uid://dt55hlr6cnink" path="res://scenes/characters/mobs/walking_enemy.tscn" id="1_eh6g0"]
+[ext_resource type="Texture2D" uid="uid://bga5ed54aabrh" path="res://assets/mobs/chort/chort_idle_anim_f0.png" id="2_nq13c"]
+
+[node name="WalkingEnemy" instance=ExtResource("1_eh6g0")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -9)
+texture = ExtResource("2_nq13c")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, -6)

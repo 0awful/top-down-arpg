@@ -1,9 +1,10 @@
-use godot::engine::{AnimationPlayer, CharacterBody2D, ICharacterBody2D};
+use godot::engine::{AnimationPlayer, Area2D, CharacterBody2D, ICharacterBody2D};
 use godot::prelude::*;
 
 use crate::consts::{FacingDirection, PLAYER_SPEED};
 use crate::player::WeaponHandle;
-use crate::utils::update_facing;
+use crate::utils::{check_overlap, damage_handler, get_nearest, get_nearest_groups, update_facing};
+use crate::Knockback;
 
 #[derive(GodotClass)]
 #[class(init, base = CharacterBody2D)]
@@ -18,6 +19,14 @@ pub struct Player {
 
 #[godot_api]
 impl Player {
+    #[func]
+    pub fn hide_weapon(&mut self) {
+        self.base
+            .get_node_as::<WeaponHandle>("WeaponHandle")
+            .bind_mut()
+            .hide();
+    }
+
     #[func]
     pub fn handle_input(&mut self) {
         let input = Input::singleton();
@@ -61,15 +70,44 @@ impl Player {
             .name(animation_name.into())
             .done();
     }
+
+    #[func]
+    pub fn hurtbox_entered(&mut self, area: Gd<Area2D>) {
+        let area_groups = get_nearest_groups(area.clone().upcast());
+        let self_groups = get_nearest_groups(self.base.clone().upcast());
+        if check_overlap(area_groups, self_groups) {
+            return;
+        }
+
+        // get nearest damage
+        // get damage at it's level. If not there, check parent and see if it has damage.
+        // Eventually giving up and returning none
+        damage_handler(self.base.clone().upcast(), area.clone().upcast());
+        if let Some(knockback) = get_nearest::<Knockback>(area.clone().upcast(), "Knockback".into())
+        {
+            self.knockback(knockback.bind().value)
+        } else {
+            godot_error!(
+                "attacking item initialize without knockback resource, {:?}",
+                area
+            )
+        }
+    }
+
+    pub fn knockback(&mut self, knockback: real) {
+        godot_print!("player recieved {} knockback", knockback);
+    }
+
+    #[func]
+    pub fn death(&mut self) {
+        self.base.queue_free();
+    }
 }
 
 #[godot_api]
 impl ICharacterBody2D for Player {
     fn ready(&mut self) {
-        self.base
-            .get_node_as::<WeaponHandle>("WeaponHandle")
-            .bind_mut()
-            .hide();
+        self.hide_weapon();
     }
 
     fn physics_process(&mut self, _delta: f64) {

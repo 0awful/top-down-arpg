@@ -1,17 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://bahbn2fj6k1gb"]
+[gd_scene load_steps=4 format=3 uid="uid://bahbn2fj6k1gb"]
 
+[ext_resource type="PackedScene" uid="uid://8877umvhvs2v" path="res://scenes/weapons/swingable_weapon.tscn" id="1_cbp7k"]
 [ext_resource type="Texture2D" uid="uid://br402f8xl6jed" path="res://assets/items/weapons/weapon_big_hammer.png" id="1_eigsu"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2m2js"]
-size = Vector2(10, 10)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a3fjf"]
+size = Vector2(10, 4)
 
-[node name="BigHammer" type="Area2D"]
+[node name="BigHammer" instance=ExtResource("1_cbp7k")]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" parent="." index="0"]
 position = Vector2(0, -18)
 texture = ExtResource("1_eigsu")
 
-[node name="Hitbox" type="CollisionShape2D" parent="."]
+[node name="Hitbox" parent="." index="1"]
 position = Vector2(0, -32)
-shape = SubResource("RectangleShape2D_2m2js")
-debug_color = Color(0.92549, 0.25098, 0.298039, 0.419608)
+shape = SubResource("RectangleShape2D_a3fjf")

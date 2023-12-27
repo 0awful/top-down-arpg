@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt55hlr6cnink"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_at0xj"]
+size = Vector2(8, 5.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y5gxm"]
+size = Vector2(12, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_37out"]
+size = Vector2(10, 18)
+
+[node name="WalkingEnemy" type="WalkingEnemy" groups=["mob"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.625)
+shape = SubResource("RectangleShape2D_at0xj")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_y5gxm")
+debug_color = Color(0.254902, 0.623529, 0.368627, 0.419608)
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_37out")
+debug_color = Color(0.945098, 0.219608, 0.231373, 0.419608)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="WeaponHandle" type="WeaponHandle" parent="."]
+
+[node name="Health" type="Health" parent="."]
+health = 3
+max_health = 3
+
+[node name="Knockback" type="Knockback" parent="."]
+
+[node name="Damage" type="Damage" parent="."]
+value = 1
+
+[connection signal="area_entered" from="Hurtbox" to="." method="hurtbox_entered"]
+[connection signal="health_hit_zero" from="Health" to="." method="death" flags=3]

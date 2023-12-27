@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://cl4ssxtsmp2d3"]
+[gd_scene load_steps=11 format=3 uid="uid://cl4ssxtsmp2d3"]
 
+[ext_resource type="PackedScene" uid="uid://0s4cqlnmfawo" path="res://scenes/weapons/gold_sword.tscn" id="1_7iabq"]
 [ext_resource type="Texture2D" uid="uid://bce54ma5vubmq" path="res://assets/player/spr_alex.png" id="1_e45ne"]
 
 [sub_resource type="Animation" id="Animation_bufw8"]
@@ -95,19 +96,22 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_llmo5"]
-size = Vector2(6, 12)
+size = Vector2(8, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ne7i"]
 size = Vector2(6, 4)
 
-[node name="Player" type="Player"]
+[node name="Player" type="Player" groups=["player"]]
+
+[node name="WeaponHandle" type="WeaponHandle" parent="."]
+
+[node name="Equiped" parent="WeaponHandle" instance=ExtResource("1_7iabq")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
 texture = ExtResource("1_e45ne")
 hframes = 4
 vframes = 4
-
-[node name="Weapon" type="Weapon" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -115,12 +119,23 @@ libraries = {
 }
 
 [node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, 4)
+position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_llmo5")
 debug_color = Color(0.27451, 0.623529, 0.333333, 0.419608)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 8)
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_4ne7i")
+
+[node name="Health" type="Health" parent="."]
+health = 3
+max_health = 3
+
+[node name="Knockback" type="Knockback" parent="."]
+
+[connection signal="area_entered" from="Hurtbox" to="." method="hurtbox_entered"]
+[connection signal="health_hit_zero" from="Health" to="." method="death" flags=3]

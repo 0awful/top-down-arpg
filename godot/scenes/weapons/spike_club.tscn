@@ -1,17 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcejht001sjmy"]
+[gd_scene load_steps=4 format=3 uid="uid://bcejht001sjmy"]
 
 [ext_resource type="Texture2D" uid="uid://cchag3tr1ug28" path="res://assets/items/weapons/weapon_baton_with_spikes.png" id="1_270gu"]
+[ext_resource type="PackedScene" uid="uid://8877umvhvs2v" path="res://scenes/weapons/swingable_weapon.tscn" id="1_fvak1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2m2js"]
 size = Vector2(10, 16)
 
-[node name="SpikeClub" type="Area2D"]
+[node name="SpikeClub" instance=ExtResource("1_fvak1")]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -10)
+[node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("1_270gu")
 
-[node name="Hitbox" type="CollisionShape2D" parent="."]
+[node name="Hitbox" parent="." index="1"]
 position = Vector2(0, -13)
 shape = SubResource("RectangleShape2D_2m2js")
-debug_color = Color(0.92549, 0.25098, 0.298039, 0.419608)

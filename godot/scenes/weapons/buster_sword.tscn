@@ -1,17 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://cv8i3lykrulrv"]
+[gd_scene load_steps=4 format=3 uid="uid://cv8i3lykrulrv"]
 
+[ext_resource type="PackedScene" uid="uid://8877umvhvs2v" path="res://scenes/weapons/swingable_weapon.tscn" id="1_la8ee"]
 [ext_resource type="Texture2D" uid="uid://bpmj0en2vh0h4" path="res://assets/items/weapons/weapon_anime_sword.png" id="1_y166s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2m2js"]
 size = Vector2(8, 23)
 
-[node name="BusterSword" type="Area2D"]
+[node name="BusterSword" instance=ExtResource("1_la8ee")]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" parent="." index="0"]
 position = Vector2(0, -14)
 texture = ExtResource("1_y166s")
 
-[node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(0, -16.5)
+[node name="Hitbox" parent="." index="1"]
+position = Vector2(0, -17)
 shape = SubResource("RectangleShape2D_2m2js")
-debug_color = Color(0.92549, 0.25098, 0.298039, 0.419608)

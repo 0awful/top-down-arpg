@@ -1,17 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3rf7bu6ijohf"]
+[gd_scene load_steps=4 format=3 uid="uid://b3rf7bu6ijohf"]
 
 [ext_resource type="Texture2D" uid="uid://glat0bchel0n" path="res://assets/items/weapons/weapon_double_axe.png" id="1_1l6i1"]
+[ext_resource type="PackedScene" uid="uid://8877umvhvs2v" path="res://scenes/weapons/swingable_weapon.tscn" id="1_7352l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2m2js"]
 size = Vector2(14, 11.5)
 
-[node name="DoubleAxe" type="Area2D"]
+[node name="DoubleAxe" instance=ExtResource("1_7352l")]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -12)
+[node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("1_1l6i1")
 
-[node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(0, -17.75)
+[node name="Hitbox" parent="." index="1"]
+position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_2m2js")
-debug_color = Color(0.92549, 0.25098, 0.298039, 0.419608)
